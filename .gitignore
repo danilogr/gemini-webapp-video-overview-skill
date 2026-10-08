@@ -1,0 +1,13 @@
+# Made by a build — never commit them into the skill.
+rec/
+frames/
+audio/
+silent.mp4
+video.mp4
+transcript.vtt
+transcript.srt
+node_modules/
+__pycache__/
+.DS_Store
+.env
+.env.*

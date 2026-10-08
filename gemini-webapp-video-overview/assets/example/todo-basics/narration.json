@@ -1,0 +1,34 @@
+{
+  "slug": "todo-basics",
+  "title": "Add a task and mark it done",
+  "url": "https://demo.playwright.dev/todomvc/#/",
+  "ready": "input.new-todo",
+  "size": [1280, 800],
+  "voice": "Charon",
+  "style": "Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+  "accent": "#2563EB",
+  "lead": 0.5,
+  "gap": 0.45,
+  "tail": 1.4,
+  "poster": "L4.start+2.5",
+  "state": {
+    "tasks": ".todo-list li label",
+    "left": ".todo-count"
+  },
+  "lines": [
+    {"id": 1, "text": "This is a to-do list. Here is how to add a task, and mark it done."},
+    {"id": 2, "text": "Type the task in the box at the top, and press Enter."},
+    {"id": 3, "text": "Add a second one the same way."},
+    {"id": 4, "text": "When a task is done, tick the circle beside it. The counter at the bottom goes down by one."},
+    {"id": 5, "text": "And Completed shows only what you have finished."}
+  ],
+  "actions": [
+    {"at": "L1.start+0.8", "do": ["ring", "input.new-todo", 2600]},
+    {"at": "L2.start+0.3", "do": ["type", "input.new-todo", "Buy milk", {"commit": "Enter"}]},
+    {"at": "L3.start+0.2", "do": ["type", "input.new-todo", "Call the plumber", {"commit": "Enter"}]},
+    {"at": "L4.start+0.7", "do": ["click", ".todo-list li:first-child .toggle"]},
+    {"at": "L4.start+3.2", "do": ["ring", ".todo-count", 2400]},
+    {"at": "L5.start+0.5", "do": ["click", "a[href='#/completed']"]},
+    {"at": "L5.end", "do": ["snap", "end"]}
+  ]
+}
