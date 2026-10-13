@@ -6,8 +6,12 @@
 Each WAV is delayed to its line's "start" with adelay and the clips are mixed
 with normalize=0: retime.py never lets two lines overlap, so full level is the
 right level, and amix's default normalisation would quietly halve it. The mix
-is padded or trimmed to the video's length. ABR sets the AAC bit rate
-(default 96k; the voice is 24 kHz mono, so more buys nothing).
+is padded or trimmed to the video's length.
+
+The voice arrives as 24 kHz mono. The mix is written as 48 kHz stereo AAC
+anyway: that is what every player, phone and in-app viewer expects, and a
+24 kHz mono track that one player reads fine can play silent in another.
+ABR sets the AAC bit rate (default 128k for the stereo pair).
 """
 import json
 import os
@@ -36,12 +40,15 @@ for i, l in enumerate(lines, start=1):            # input 0 is the video
     labels.append(f"[a{i}]")
 filt = (";".join(parts) + ";" + "".join(labels) +
         f"amix=inputs={len(lines)}:normalize=0:dropout_transition=0[mx];"
-        f"[mx]apad,atrim=0:{vdur:.3f}[a]")
+        f"[mx]apad,atrim=0:{vdur:.3f},"
+        # The same voice in both channels at full level. A plain -ac 2 upmix
+        # lowers each channel by 3 dB, and the narration sounds quieter.
+        f"pan=stereo|c0=c0|c1=c0,aresample=48000[a]")
 
 r = subprocess.run(
     ["ffmpeg", "-y", "-i", str(silent), *inputs, "-filter_complex", filt,
      "-map", "0:v", "-map", "[a]", "-c:v", "copy",
-     "-c:a", "aac", "-b:a", os.environ.get("ABR", "96k"),
+     "-c:a", "aac", "-b:a", os.environ.get("ABR", "128k"),
      "-movflags", "+faststart", str(out)],
     capture_output=True, text=True)
 if r.returncode:

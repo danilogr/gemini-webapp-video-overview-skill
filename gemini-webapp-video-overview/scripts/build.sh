@@ -18,7 +18,7 @@
 # OPENAI_API_KEY is set, else gemini.
 #
 # Environment: OUT (mp4 path), CRF (quality, default 23), ABR (audio bit
-# rate, default 96k), NODE_PATH (a node_modules holding playwright).
+# rate, default 128k), NODE_PATH (a node_modules holding playwright).
 # Needs: python3, node, ffmpeg/ffprobe, Playwright with Chromium.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -33,7 +33,7 @@ esac
 DIR="$(cd "$1" && pwd)"
 OUT="${OUT:-$DIR/video.mp4}"
 CRF="${CRF:-23}"
-export ABR="${ABR:-96k}"
+export ABR="${ABR:-128k}"
 
 for tool in python3 node ffmpeg ffprobe; do
   command -v "$tool" >/dev/null || { echo "missing: $tool" >&2; exit 1; }

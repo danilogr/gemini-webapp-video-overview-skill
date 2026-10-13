@@ -100,6 +100,12 @@ number of inputs. Fix (built in): `normalize=0` — the lines never overlap.
 changed. Fix (built in): each WAV records its `_voice`; any change re-voices
 every line.
 
+**The video plays, but with no voice, on one device.** The file has sound
+(inspect.py measures it) but a player drops it. TTS voices are 24 kHz mono,
+and not every player, phone or in-app viewer plays that reliably. Fix (built
+in): mux.py writes 48 kHz stereo AAC, the format every player expects. If a
+viewer is still silent, check it did not start muted — many do.
+
 **Gemini 429 / 500.** Rate limits and occasional empty responses on the
 preview models. Fix (built in): backoff and retry.
 
