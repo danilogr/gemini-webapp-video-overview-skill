@@ -1,0 +1,162 @@
+{
+  "slug": "finish-and-filter",
+  "title": "Finish a task, and filter the list",
+  "url": "http://127.0.0.1:8765/index.html?reset",
+  "ready": "#add-form",
+  "size": [
+    1280,
+    800
+  ],
+  "voice": "Charon",
+  "style": "Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+  "accent": "#0f766e",
+  "lead": 0.5,
+  "gap": 0.45,
+  "tail": 1.4,
+  "poster": "L2.start+1.0",
+  "setup": [
+    [
+      "select",
+      "#new-priority",
+      "High"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Book the venue",
+      {
+        "commit": "Enter"
+      }
+    ],
+    [
+      "select",
+      "#new-priority",
+      "Normal"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Send the invitations",
+      {
+        "commit": "Enter"
+      }
+    ],
+    [
+      "select",
+      "#new-priority",
+      "Low"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Order name badges",
+      {
+        "commit": "Enter"
+      }
+    ]
+  ],
+  "state": {
+    "shown": "#tasks li a",
+    "left": "#left",
+    "filter": ".filter[aria-pressed=true]"
+  },
+  "lines": [
+    {
+      "id": 1,
+      "text": "When a task is finished, tick the box beside it.",
+      "_spoken": "When a task is finished, tick the box beside it.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 0.5,
+      "end": 4.27,
+      "_dur": 3.77
+    },
+    {
+      "id": 2,
+      "text": "It is crossed out, and the open count goes down by one.",
+      "_spoken": "It is crossed out, and the open count goes down by one.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 4.72,
+      "end": 9.01,
+      "_dur": 4.29
+    },
+    {
+      "id": 3,
+      "text": "The filters help you focus. Open shows only what is left to do.",
+      "_spoken": "The filters help you focus. Open shows only what is left to do.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 9.46,
+      "end": 14.67,
+      "_dur": 5.21
+    },
+    {
+      "id": 4,
+      "text": "Done shows what you have finished. And All brings everything back.",
+      "_spoken": "Done shows what you have finished. And All brings everything back.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 15.12,
+      "end": 20.57,
+      "_dur": 5.45
+    }
+  ],
+  "actions": [
+    {
+      "at": "L1.start+0.5",
+      "do": [
+        "click",
+        "#tasks li:nth-child(1) input[type=checkbox]"
+      ]
+    },
+    {
+      "at": "L2.start+0.3",
+      "do": [
+        "ring",
+        "#tasks li:nth-child(1)",
+        2000
+      ]
+    },
+    {
+      "at": "L2.start+2.3",
+      "do": [
+        "ring",
+        "#left",
+        1800
+      ]
+    },
+    {
+      "at": "L3.start+1.6",
+      "do": [
+        "click",
+        "#f-open"
+      ]
+    },
+    {
+      "at": "L3.end",
+      "do": [
+        "snap",
+        "open"
+      ]
+    },
+    {
+      "at": "L4.start+0.2",
+      "do": [
+        "click",
+        "#f-done"
+      ]
+    },
+    {
+      "at": "L4.start+2.6",
+      "do": [
+        "click",
+        "#f-all"
+      ]
+    },
+    {
+      "at": "L4.end",
+      "do": [
+        "snap",
+        "end"
+      ]
+    }
+  ],
+  "total_seconds": 21.97
+}

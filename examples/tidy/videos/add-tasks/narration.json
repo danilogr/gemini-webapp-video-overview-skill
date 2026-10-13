@@ -1,0 +1,148 @@
+{
+  "slug": "add-tasks",
+  "title": "Add a task and set its priority",
+  "url": "http://127.0.0.1:8765/index.html?reset",
+  "ready": "#add-form",
+  "size": [
+    1280,
+    800
+  ],
+  "voice": "Charon",
+  "style": "Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+  "accent": "#0f766e",
+  "lead": 0.5,
+  "gap": 0.45,
+  "tail": 1.4,
+  "poster": "L4.start+2.6",
+  "state": {
+    "tasks": "#tasks li a",
+    "badges": "#tasks .badge",
+    "left": "#left"
+  },
+  "lines": [
+    {
+      "id": 1,
+      "text": "This is Tidy, a small task list. Here is how to add a task, and say how urgent it is.",
+      "_spoken": "This is Tidy, a small task list. Here is how to add a task, and say how urgent it is.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 0.5,
+      "end": 8.47,
+      "_dur": 7.97
+    },
+    {
+      "id": 2,
+      "text": "Type what needs doing in the box at the top.",
+      "_spoken": "Type what needs doing in the box at the top.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 8.92,
+      "end": 12.13,
+      "_dur": 3.21
+    },
+    {
+      "id": 3,
+      "text": "Choose its priority from the menu beside it. This one is High.",
+      "_spoken": "Choose its priority from the menu beside it. This one is High.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 12.58,
+      "end": 17.67,
+      "_dur": 5.09
+    },
+    {
+      "id": 4,
+      "text": "Then click Add task. It joins the list, with its priority on the right.",
+      "_spoken": "Then click Add task. It joins the list, with its priority on the right.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 18.12,
+      "end": 24.85,
+      "_dur": 6.73
+    },
+    {
+      "id": 5,
+      "text": "Add the next one the same way. The counter shows how many tasks are still open.",
+      "_spoken": "Add the next one the same way. The counter shows how many tasks are still open.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 25.3,
+      "end": 30.75,
+      "_dur": 5.45
+    }
+  ],
+  "actions": [
+    {
+      "at": "L1.start+1.2",
+      "do": [
+        "ring",
+        "#add-form",
+        2800
+      ]
+    },
+    {
+      "at": "L2.start+0.3",
+      "do": [
+        "type",
+        "#new-title",
+        "Book the venue",
+        {
+          "commit": false
+        }
+      ]
+    },
+    {
+      "at": "L3.start+0.6",
+      "do": [
+        "select",
+        "#new-priority",
+        "High"
+      ]
+    },
+    {
+      "at": "L4.start+0.3",
+      "do": [
+        "click",
+        "#add"
+      ]
+    },
+    {
+      "at": "L4.start+2.4",
+      "do": [
+        "ring",
+        "#tasks li:first-child .badge",
+        1800
+      ]
+    },
+    {
+      "at": "L5.start+0.2",
+      "do": [
+        "select",
+        "#new-priority",
+        "Normal"
+      ]
+    },
+    {
+      "at": "L5.start+1.4",
+      "do": [
+        "type",
+        "#new-title",
+        "Send the invitations",
+        {
+          "commit": "Enter"
+        }
+      ]
+    },
+    {
+      "at": "L5.start+4.2",
+      "do": [
+        "ring",
+        "#left",
+        1800
+      ]
+    },
+    {
+      "at": "L5.end",
+      "do": [
+        "snap",
+        "end"
+      ]
+    }
+  ],
+  "total_seconds": 32.15
+}

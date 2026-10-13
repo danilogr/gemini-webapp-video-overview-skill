@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tidy — task</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo"><span></span>Tidy</div>
+  <nav><a href="index.html">Tasks</a><a href="help.html">Help</a></nav>
+</header>
+<main>
+  <a class="back" id="back" href="index.html">← All tasks</a>
+  <div class="card" id="detail">
+    <h1 id="title"></h1>
+    <div class="meta"><span class="badge" id="priority"></span><span id="state"></span></div>
+    <label for="notes"><b>Notes</b></label>
+    <textarea id="notes" placeholder="Anything to remember about this task"></textarea>
+    <div style="margin-top:12px"><button class="primary" id="save">Save notes</button><span class="saved" id="saved"></span></div>
+  </div>
+</main>
+<script src="app.js"></script>
+<script src="task.js"></script>
+</body>
+</html>

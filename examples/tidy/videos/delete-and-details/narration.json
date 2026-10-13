@@ -1,0 +1,203 @@
+{
+  "slug": "delete-and-details",
+  "title": "Delete a task, and keep notes on one",
+  "url": "http://127.0.0.1:8765/index.html?reset",
+  "ready": "#add-form",
+  "size": [
+    1280,
+    800
+  ],
+  "voice": "Charon",
+  "style": "Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+  "accent": "#0f766e",
+  "lead": 0.5,
+  "gap": 0.45,
+  "tail": 1.4,
+  "poster": "L2.start+0.9",
+  "setup": [
+    [
+      "select",
+      "#new-priority",
+      "High"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Book the venue",
+      {
+        "commit": "Enter"
+      }
+    ],
+    [
+      "select",
+      "#new-priority",
+      "Normal"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Send the invitations",
+      {
+        "commit": "Enter"
+      }
+    ],
+    [
+      "select",
+      "#new-priority",
+      "Low"
+    ],
+    [
+      "type",
+      "#new-title",
+      "Order name badges",
+      {
+        "commit": "Enter"
+      }
+    ]
+  ],
+  "state": {
+    "tasks": "#tasks li a",
+    "notes": "#notes",
+    "dialog": "dialog[open] h2",
+    "status": "#status"
+  },
+  "lines": [
+    {
+      "id": 1,
+      "text": "To remove a task, click the cross at the end of its row.",
+      "_spoken": "To remove a task, click the cross at the end of its row.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 0.5,
+      "end": 4.27,
+      "_dur": 3.77
+    },
+    {
+      "id": 2,
+      "text": "Tidy asks first. Click Delete to confirm, or Cancel to keep it.",
+      "_spoken": "Tidy asks first. Click Delete to confirm, or Cancel to keep it.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 4.72,
+      "end": 10.01,
+      "_dur": 5.29
+    },
+    {
+      "id": 3,
+      "text": "Click a task's name to open its own page.",
+      "_spoken": "Click a task's name to open its own page.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 10.46,
+      "end": 13.71,
+      "_dur": 3.25
+    },
+    {
+      "id": 4,
+      "text": "Write what you need to remember in Notes, then click Save notes.",
+      "_spoken": "Write what you need to remember in Notes, then click Save notes.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 14.16,
+      "end": 19.25,
+      "_dur": 5.09
+    },
+    {
+      "id": 5,
+      "text": "And All tasks takes you back to the list.",
+      "_spoken": "And All tasks takes you back to the list.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 19.7,
+      "end": 23.23,
+      "_dur": 3.53
+    }
+  ],
+  "actions": [
+    {
+      "at": "L1.start+1.3",
+      "do": [
+        "click",
+        "#tasks li:nth-child(3) .del"
+      ]
+    },
+    {
+      "at": "L2.start+0.3",
+      "do": [
+        "ring",
+        "#confirm",
+        1700
+      ]
+    },
+    {
+      "at": "L2.start+2.1",
+      "do": [
+        "click",
+        "#really-delete"
+      ]
+    },
+    {
+      "at": "L2.end",
+      "do": [
+        "snap",
+        "deleted"
+      ]
+    },
+    {
+      "at": "L3.start+0.4",
+      "do": [
+        "click",
+        "#tasks li:nth-child(1) a"
+      ]
+    },
+    {
+      "at": "L3.start+0.4",
+      "do": [
+        "waitFor",
+        "#notes"
+      ]
+    },
+    {
+      "at": "L4.start+0.3",
+      "do": [
+        "type",
+        "#notes",
+        "Ask about parking for forty cars.",
+        {
+          "commit": false
+        }
+      ]
+    },
+    {
+      "at": "L4.start+3.6",
+      "do": [
+        "click",
+        "#save"
+      ]
+    },
+    {
+      "at": "L4.end",
+      "do": [
+        "snap",
+        "notes"
+      ]
+    },
+    {
+      "at": "L5.start+0.4",
+      "do": [
+        "click",
+        "#back"
+      ]
+    },
+    {
+      "at": "L5.start+0.4",
+      "do": [
+        "waitFor",
+        "#tasks"
+      ]
+    },
+    {
+      "at": "L5.end",
+      "do": [
+        "snap",
+        "end"
+      ]
+    }
+  ],
+  "total_seconds": 24.63
+}

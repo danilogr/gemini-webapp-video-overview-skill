@@ -46,6 +46,16 @@ python3 $S/scripts/inspect.py /tmp/todo-basics              # frames to check
 The example records the public TodoMVC demo at
 https://demo.playwright.dev/todomvc/ — about 26 seconds, ~500 KB.
 
+## A full example
+
+[`examples/tidy/`](examples/tidy/) is a small invented task app and three
+narrated videos the skill built of it: typing, a native menu, filters, a
+confirm dialog (the pointer stays above it), a click that loads another page
+(the pointer keeps its place), and a Help page that plays the videos from
+`videos.json` with captions.
+
+![Tidy's Help page playing a video, with captions](examples/tidy/docs/help-page.png)
+
 ## Layout
 
 ```
@@ -54,6 +64,7 @@ gemini-webapp-video-overview/
   scripts/              build, voice, timing, recording, mixing, publishing, inspection
   references/           narration format, writing, voices, pitfalls, serving
   assets/example/       a complete working example
+examples/tidy/          a sample app with three built videos and a Help page
 ```
 
 Start with `SKILL.md`, then `references/narration-format.md`.

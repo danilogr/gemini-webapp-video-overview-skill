@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "add-tasks",
+    "title": "Add a task and set its priority",
+    "seconds": 33
+  },
+  {
+    "slug": "finish-and-filter",
+    "title": "Finish a task, and filter the list",
+    "seconds": 22
+  },
+  {
+    "slug": "delete-and-details",
+    "title": "Delete a task, and keep notes on one",
+    "seconds": 25
+  }
+]

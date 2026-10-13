@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tidy — tasks</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo"><span></span>Tidy</div>
+  <nav><a href="index.html" aria-current="page">Tasks</a><a href="help.html">Help</a></nav>
+</header>
+<main>
+  <h1>Your tasks</h1>
+  <p class="sub">An invented sample app, made to show the video skill at work.</p>
+  <div class="card">
+    <form class="add" id="add-form">
+      <input type="text" id="new-title" placeholder="What needs doing?" aria-label="New task" autocomplete="off">
+      <select id="new-priority" aria-label="Priority">
+        <option>Low</option><option selected>Normal</option><option>High</option>
+      </select>
+      <button class="primary" id="add">Add task</button>
+    </form>
+    <div class="bar">
+      <button class="filter" data-f="all" id="f-all" aria-pressed="true">All</button>
+      <button class="filter" data-f="open" id="f-open" aria-pressed="false">Open</button>
+      <button class="filter" data-f="done" id="f-done" aria-pressed="false">Done</button>
+      <span class="spacer"></span>
+      <span id="left"></span>
+    </div>
+    <ul class="tasks" id="tasks"></ul>
+  </div>
+  <div id="status" role="status"></div>
+</main>
+
+<dialog id="confirm">
+  <h2>Delete this task?</h2>
+  <p id="confirm-text"></p>
+  <div class="right">
+    <button id="cancel">Cancel</button>
+    <button class="danger" id="really-delete">Delete</button>
+  </div>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
