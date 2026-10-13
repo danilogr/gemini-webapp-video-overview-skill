@@ -36,12 +36,15 @@ SKILL="$PWD/gemini-webapp-video-overview-skill/gemini-webapp-video-overview"
 Create the target folder first if it does not exist (`mkdir -p .agents/skills`).
 `.agents/skills/` in a project is read by both Gemini CLI and Antigravity.
 
-Gemini CLI can also copy the skill in: `gemini skills install "$SKILL"`
-(add `--scope workspace` for one project). Installing straight from the git
-URL (`gemini skills install <url> --path gemini-webapp-video-overview`) needs
-the repo to be readable without a login: the installer cannot ask for one,
-so it fails on a private repo over both SSH and HTTPS. Clone, then install
-from the folder.
+Gemini CLI can also install straight from GitHub, no clone needed:
+
+```bash
+gemini skills install https://github.com/danilogr/gemini-webapp-video-overview-skill.git \
+  --path gemini-webapp-video-overview            # add --scope workspace for one project
+```
+
+Use the HTTPS URL: the installer cannot ask for a login or an SSH key
+passphrase, so the SSH URL can fail even on a public repo.
 
 Check it is found: `/skills` in Claude Code, `gemini skills list` in Gemini
 CLI. Gemini CLI reads a project's skills only once you trust the folder.
@@ -54,7 +57,7 @@ adding a task in the app at localhost:3000" — and the agent follows the skill.
 | Agent | Result |
 |---|---|
 | Claude Code (Claude Opus) | Built the TodoMVC example and the three Tidy videos; a second agent with only the skill built a login/logout video of a public test site. |
-| Gemini CLI 0.63.0 (`gemini-3.8-flash`) | With only the skill in `.agents/skills/`, made a 24 s video of Tidy from a one-paragraph request, checked its frames, and published it — see [`examples/tidy/made-by-gemini-cli/`](examples/tidy/made-by-gemini-cli/). Its own safety policy blocked `build_all.sh`; it built and published with `build.sh` and `publish.py` instead. |
+| Gemini CLI 0.63.0 (`gemini-3.8-flash`) | With only the skill in `.agents/skills/`, made a 24 s video of Tidy from a one-paragraph request, checked its frames, and published it — see [`examples/tidy/made-by-gemini-cli/`](examples/tidy/made-by-gemini-cli/). Its own safety policy blocked `build_all.sh`; it built and published with `build.sh` and `publish.py` instead. Again with the skill installed from this public repo by `gemini skills install <url>`: a 26 s video of adding tasks and the Open and Done filters, frames checked, in 6.6 minutes. |
 | Antigravity | Not tested. It reads the same Agent Skills format from `.agents/skills/` or `~/.gemini/config/skills/`. |
 
 ## Requirements
