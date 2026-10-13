@@ -18,14 +18,44 @@ product overviews, feature how-tos, "what's new" clips and walkthroughs.
 
 ## Install
 
+The skill follows the open [Agent Skills](https://agentskills.io) format — a
+folder with a `SKILL.md` — so the same folder works in Claude Code, Gemini CLI
+and Antigravity. Clone once, then link it where your tool looks:
+
 ```bash
 git clone git@github.com:danilogr/gemini-webapp-video-overview-skill.git
-ln -s "$PWD/gemini-webapp-video-overview-skill/gemini-webapp-video-overview" \
-      ~/.claude/skills/gemini-webapp-video-overview
+SKILL="$PWD/gemini-webapp-video-overview-skill/gemini-webapp-video-overview"
 ```
 
-Claude Code then uses the skill when you ask for a demo or how-to video of a
-web app. You can also run the scripts directly.
+| Tool | Everywhere (your user) | One project only |
+|---|---|---|
+| Claude Code | `ln -s "$SKILL" ~/.claude/skills/` | `ln -s "$SKILL" .claude/skills/` |
+| Gemini CLI | `gemini skills link "$SKILL"` | `ln -s "$SKILL" .agents/skills/` |
+| Antigravity | `ln -s "$SKILL" ~/.gemini/config/skills/` | `ln -s "$SKILL" .agents/skills/` |
+
+Create the target folder first if it does not exist (`mkdir -p .agents/skills`).
+`.agents/skills/` in a project is read by both Gemini CLI and Antigravity.
+
+Gemini CLI can also copy the skill in: `gemini skills install "$SKILL"`
+(add `--scope workspace` for one project). Installing straight from the git
+URL (`gemini skills install <url> --path gemini-webapp-video-overview`) needs
+the repo to be readable without a login: the installer cannot ask for one,
+so it fails on a private repo over both SSH and HTTPS. Clone, then install
+from the folder.
+
+Check it is found: `/skills` in Claude Code, `gemini skills list` in Gemini
+CLI. Gemini CLI reads a project's skills only once you trust the folder.
+
+Then ask for a video in plain words — "make a 30-second how-to video of
+adding a task in the app at localhost:3000" — and the agent follows the skill.
+
+## Tested with
+
+| Agent | Result |
+|---|---|
+| Claude Code (Claude Opus) | Built the TodoMVC example and the three Tidy videos; a second agent with only the skill built a login/logout video of a public test site. |
+| Gemini CLI 0.63.0 (`gemini-3.8-flash`) | With only the skill in `.agents/skills/`, made a 24 s video of Tidy from a one-paragraph request, checked its frames, and published it — see [`examples/tidy/made-by-gemini-cli/`](examples/tidy/made-by-gemini-cli/). Its own safety policy blocked `build_all.sh`; it built and published with `build.sh` and `publish.py` instead. |
+| Antigravity | Not tested. It reads the same Agent Skills format from `.agents/skills/` or `~/.gemini/config/skills/`. |
 
 ## Requirements
 

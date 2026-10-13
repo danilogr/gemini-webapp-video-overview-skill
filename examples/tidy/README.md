@@ -17,6 +17,12 @@ app's teal as the pointer accent. Each has captions (`.vtt`) and a poster
 (`site/help.html`) builds its list from that file and plays each video with
 captions on — the pattern in `references/serving.md`.
 
+## Made by another agent
+
+[`made-by-gemini-cli/`](made-by-gemini-cli/) holds a fourth video of Tidy,
+made by Gemini CLI with only this skill — its narration, captions, poster and
+the request it was given.
+
 ## Layout
 
 ```

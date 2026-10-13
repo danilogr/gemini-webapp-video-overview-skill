@@ -15,6 +15,31 @@ in a video somebody will show a customer.
 Everything lives in `scripts/`. You write one `narration.json` per video; the
 scripts do the rest.
 
+## First: find this skill's folder
+
+Every path below (`scripts/…`, `references/…`, `assets/…`) is relative to
+the folder that holds this SKILL.md — not to the project you are working in.
+Some agents are told that folder; others are not. Before running anything,
+set it once and use it in every command:
+
+```bash
+# The first install location that exists; -P resolves a linked folder.
+SKILL_DIR="$(cd "$(dirname "$(ls -d \
+  .agents/skills/gemini-webapp-video-overview/SKILL.md \
+  .gemini/skills/gemini-webapp-video-overview/SKILL.md \
+  .claude/skills/gemini-webapp-video-overview/SKILL.md \
+  ~/.agents/skills/gemini-webapp-video-overview/SKILL.md \
+  ~/.gemini/skills/gemini-webapp-video-overview/SKILL.md \
+  ~/.gemini/config/skills/gemini-webapp-video-overview/SKILL.md \
+  ~/.claude/skills/gemini-webapp-video-overview/SKILL.md \
+  2>/dev/null | head -1)")" && pwd -P)"
+ls "$SKILL_DIR/scripts/build.sh"     # must exist before you go on
+```
+
+If you were given the folder's path, use that instead. Then run scripts as
+`"$SKILL_DIR/scripts/build.sh" videos/<slug>` from the project, so the
+video folders stay in the project and the skill's folder stays clean.
+
 ## The one idea that makes it work: audio is the master clock
 
 Write the visuals first and the spoken lines always run longer than their
@@ -45,10 +70,11 @@ rebuild.
     with `TTS_ENGINE=openai`.
 - If the user keeps keys in a `.env`, load only the one variable into the
   command's environment, without its quotes:
-  `GEMINI_API_KEY="$(grep -E '^GEMINI_API_KEY=' path/.env | head -1 | cut -d= -f2- | tr -d "\"'")" scripts/build.sh …`.
+  `GEMINI_API_KEY="$(grep -E '^GEMINI_API_KEY=' path/.env | head -1 | cut -d= -f2- | tr -d "\"'")" "$SKILL_DIR/scripts/build.sh" …`.
   Never echo it, never write it into the project, never commit it.
-- Playwright: `build.sh` uses whatever `node` can import, else `NODE_PATH`,
-  else a copy in the npx cache, and prints which version it chose. That
+- Playwright: do not search for it yourself. `build.sh` uses whatever `node`
+  can import, else `NODE_PATH`, else a copy in the npx cache, and prints which
+  version it chose; only if it says Playwright is missing, install it. That
   version's Chromium must be installed (`npx playwright@<version> install
   chromium`).
 
@@ -126,8 +152,8 @@ Timing rules of thumb, learned the hard way:
 ### 4. Build
 
 ```bash
-scripts/build.sh videos/<slug>                 # one video → videos/<slug>/video.mp4
-scripts/build_all.sh videos public/videos      # all, plus captions, posters, videos.json
+"$SKILL_DIR/scripts/build.sh" videos/<slug>               # one video → videos/<slug>/video.mp4
+"$SKILL_DIR/scripts/build_all.sh" videos public/videos    # all, plus captions, posters, videos.json
 ```
 
 The mode flag comes first, before the folders: `build_all.sh --no-tts videos
@@ -142,7 +168,7 @@ The logs cannot tell you a ring landed on the wrong element or the pointer
 clicked while the page was loading. Run:
 
 ```bash
-python3 scripts/inspect.py videos/<slug>
+python3 "$SKILL_DIR/scripts/inspect.py" videos/<slug>
 ```
 
 It finds the video wherever the last build wrote it (pass a path as a second

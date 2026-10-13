@@ -1,0 +1,138 @@
+{
+  "slug": "add-task",
+  "title": "Add a high priority task and mark it done",
+  "url": "http://127.0.0.1:8765/index.html?reset",
+  "ready": "#tasks",
+  "size": [
+    1280,
+    800
+  ],
+  "voice": "Charon",
+  "style": "Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+  "accent": "#0f766e",
+  "outline": "#18212f",
+  "lead": 0.5,
+  "gap": 0.45,
+  "tail": 1.4,
+  "poster": "L4.start+2.5",
+  "state": {
+    "tasks": "#tasks a",
+    "badge": "#tasks .badge",
+    "left": "#left",
+    "status": "#status"
+  },
+  "lines": [
+    {
+      "id": 1,
+      "text": "In Tidy, you can track urgent work by adding tasks with high priority.",
+      "_spoken": "In Tidy, you can track urgent work by adding tasks with high priority.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 0.5,
+      "end": 5.79,
+      "_dur": 5.29
+    },
+    {
+      "id": 2,
+      "text": "Type what needs doing in the box at the top.",
+      "_spoken": "Type what needs doing in the box at the top.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 6.24,
+      "end": 9.33,
+      "_dur": 3.09
+    },
+    {
+      "id": 3,
+      "text": "From the Priority menu, select High.",
+      "_spoken": "From the Priority menu, select High.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 9.78,
+      "end": 13.07,
+      "_dur": 3.29
+    },
+    {
+      "id": 4,
+      "text": "Click Add task to place it on your list with a red High badge.",
+      "_spoken": "Click Add task to place it on your list with a red High badge.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 13.52,
+      "end": 18.81,
+      "_dur": 5.29
+    },
+    {
+      "id": 5,
+      "text": "When the work is done, tick the checkbox to cross it off.",
+      "_spoken": "When the work is done, tick the checkbox to cross it off.",
+      "_voice": "gemini|gemini-2.5-flash-preview-tts|Charon|Read this in a calm, friendly and unhurried voice, as if showing a colleague",
+      "start": 19.26,
+      "end": 23.35,
+      "_dur": 4.09
+    }
+  ],
+  "actions": [
+    {
+      "at": "L1.start+0.6",
+      "do": [
+        "ring",
+        "#new-title",
+        1800
+      ]
+    },
+    {
+      "at": "L2.start+0.3",
+      "do": [
+        "type",
+        "#new-title",
+        "Review security audit",
+        {
+          "commit": false
+        }
+      ]
+    },
+    {
+      "at": "L3.start+0.4",
+      "do": [
+        "select",
+        "#new-priority",
+        "High"
+      ]
+    },
+    {
+      "at": "L4.start+0.4",
+      "do": [
+        "click",
+        "#add"
+      ]
+    },
+    {
+      "at": "L4.start+2.0",
+      "do": [
+        "ring",
+        ".badge.High",
+        1800
+      ]
+    },
+    {
+      "at": "L5.start+0.5",
+      "do": [
+        "click",
+        "#tasks input[type=checkbox]"
+      ]
+    },
+    {
+      "at": "L5.start+2.2",
+      "do": [
+        "ring",
+        "#left",
+        1600
+      ]
+    },
+    {
+      "at": "L5.end",
+      "do": [
+        "snap",
+        "end"
+      ]
+    }
+  ],
+  "total_seconds": 24.75
+}
