@@ -13,9 +13,10 @@
 # app is recorded against those times. Record first and the pointer drifts off
 # the words by the third line, and every fix moves everything after it.
 #
-# Voice engine: $TTS_ENGINE (gemini|openai), else narration.json "engine",
-# else gemini when GEMINI_API_KEY/GOOGLE_API_KEY is set, else openai when
-# OPENAI_API_KEY is set, else gemini.
+# Voice engine: $TTS_ENGINE (gemini|openai|voicebox), else narration.json
+# "engine", else gemini when GEMINI_API_KEY/GOOGLE_API_KEY is set, else openai
+# when OPENAI_API_KEY is set, else voicebox (offline: NeMo-Speech, voicebox's
+# engine) when nemo-speech is installed or its server answers, else gemini.
 #
 # Environment: OUT (mp4 path), CRF (quality, default 23), ABR (audio bit
 # rate, default 128k), NODE_PATH (a node_modules holding playwright).
@@ -61,8 +62,13 @@ engine="${TTS_ENGINE:-$(python3 -c "import json,sys;print(json.load(open(sys.arg
 if [[ -z "$engine" ]]; then
   if [[ -n "${GEMINI_API_KEY:-}${GOOGLE_API_KEY:-}" ]]; then engine=gemini
   elif [[ -n "${OPENAI_API_KEY:-}" ]]; then engine=openai
+  # No key at all: use the offline voice if NeMo-Speech is installed.
+  elif command -v nemo-speech >/dev/null || [[ -x "$HOME/.local/bin/nemo-speech" ]] \
+       || curl -s -m 2 -o /dev/null "${NEMO_HTTP_URL:-http://127.0.0.1:8082}/v1/models"; then engine=voicebox
   else engine=gemini; fi
 fi
+[[ "$engine" == local ]] && engine=voicebox          # the earlier name of the offline engine
+[[ -f "$HERE/tts_$engine.py" ]] || { echo "unknown voice engine: $engine (gemini, openai or voicebox)" >&2; exit 2; }
 
 if [[ "$TTS" != none ]]; then
   echo "== 1/5  voice ($engine)"

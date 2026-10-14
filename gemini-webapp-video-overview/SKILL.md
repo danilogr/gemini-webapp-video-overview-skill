@@ -68,6 +68,13 @@ rebuild.
     Google AI Studio. Both work (the key goes in the `x-goog-api-key` header).
   - **OpenAI (fallback):** `OPENAI_API_KEY`. Used when no Gemini key is set, or
     with `TTS_ENGINE=openai`.
+  - **Offline, no key — voicebox:** NVIDIA NeMo-Speech.cpp with MagpieTTS on
+    this machine, the engine of the [voicebox](https://github.com/danilogr/voicebox)
+    plugin. Used when no key is set and `nemo-speech` is installed (or its
+    server answers), or with `TTS_ENGINE=voicebox` / `"engine": "voicebox"`.
+    Nothing leaves the machine. With voicebox installed, `/voicebox:setup`
+    once is the whole setup and its server is shared; otherwise see
+    `references/voices.md`, "Offline".
 - If the user keeps keys in a `.env`, load only the one variable into the
   command's environment, without its quotes:
   `GEMINI_API_KEY="$(grep -E '^GEMINI_API_KEY=' path/.env | head -1 | cut -d= -f2- | tr -d "\"'")" "$SKILL_DIR/scripts/build.sh" …`.

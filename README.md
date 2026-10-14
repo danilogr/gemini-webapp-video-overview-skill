@@ -10,7 +10,9 @@ product overviews, feature how-tos, "what's new" clips and walkthroughs.
   then every action is scheduled against the real timing (`"L4.start+0.6"`),
   so the pointer lands on the words.
 - **Gemini TTS** by default (30 voices, a style direction that is not read
-  aloud). **OpenAI TTS** as the fallback.
+  aloud). **OpenAI TTS** as the fallback. **Fully offline** with the engine of
+  [voicebox](https://github.com/danilogr/voicebox) — NVIDIA NeMo-Speech.cpp and
+  MagpieTTS on your machine, no key, nothing sent anywhere.
 - **WebVTT captions, poster frames and a `videos.json` manifest**, ready to
   serve on a help page.
 - **A checking step**: one frame per action, the spoken line at that moment,
@@ -64,8 +66,11 @@ adding a task in the app at localhost:3000" — and the agent follows the skill.
 
 - `python3`, `node`, `ffmpeg`
 - Playwright with Chromium: `npm i -g playwright && npx playwright install chromium`
-- A voice key in the environment: `GEMINI_API_KEY` (an `AIza…` or `AQ.…` key
-  from https://aistudio.google.com/apikey), or `OPENAI_API_KEY`
+- A voice: `GEMINI_API_KEY` (an `AIza…` or `AQ.…` key from
+  https://aistudio.google.com/apikey), or `OPENAI_API_KEY` — or no key at all
+  with voicebox's offline engine: `/voicebox:setup` if you use voicebox,
+  otherwise the install in
+  [`references/voices.md`](gemini-webapp-video-overview/references/voices.md#offline-voiceboxs-engine-nemo-speechcpp--magpietts)
 
 ## Try it
 
@@ -101,3 +106,7 @@ examples/tidy/          a sample app with three built videos and a Help page
 ```
 
 Start with `SKILL.md`, then `references/narration-format.md`.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
